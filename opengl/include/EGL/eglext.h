@@ -240,10 +240,13 @@ struct ANativeWindowBuffer;
 #define EGL_ANDROID_get_render_buffer 1
 #ifdef EGL_EGLEXT_PROTOTYPES
 EGLAPI EGLClientBuffer EGLAPIENTRY eglGetRenderBufferANDROID(EGLDisplay dpy, EGLSurface draw);
+#ifdef BCM_HARDWARE
+EGLAPI void* EGLAPIENTRY eglGetComposerANDROID(EGLDisplay dpy, EGLSurface draw);
+#endif
 #endif
 typedef EGLClientBuffer (EGLAPIENTRYP PFNEGLGETRENDERBUFFERANDROIDPROC) (EGLDisplay dpy, EGLSurface draw);
 #endif
-#endif // QCOM_HARDWARE || BCM_HARDWARE
+#endif // QCOM_HARDWARE || BCM_HARDWARE	
 
 #ifndef EGL_ANDROID_recordable
 #define EGL_ANDROID_recordable 1

@@ -62,7 +62,12 @@ EGL_ENTRY(EGLBoolean,   eglGetSyncAttribKHR,    EGLDisplay, EGLSyncKHR, EGLint, 
 
 EGL_ENTRY(EGLBoolean, eglSetSwapRectangleANDROID, EGLDisplay, EGLSurface, EGLint, EGLint, EGLint, EGLint)
 EGL_ENTRY(EGLClientBuffer, eglGetRenderBufferANDROID, EGLDisplay, EGLSurface)
+
+/* BROADCOM extensions */
+
+#ifdef BCM_HARDWARE
 EGL_ENTRY(void*, eglGetComposerANDROID, EGLDisplay, EGLSurface)
+#endif
 
 /* NVIDIA extensions */
 

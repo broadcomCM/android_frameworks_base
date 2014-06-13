@@ -53,20 +53,28 @@ namespace android {
             #define GET_TLS(reg) \
                 "mov   " #reg ", #0xFFFF0FFF      \n"  \
                 "ldr   " #reg ", [" #reg ", #-15] \n"
+	#endif
     #endif
-
+    
     #define API_ENTRY(_api) __attribute__((naked)) _api
 
     #ifdef BCM_HARDWARE
-        #define CALL_GL_EXTENSION_API(_api)                          \
-             asm volatile(                                           \
-                 GET_TLS(r12)                                        \
-                 "cmp   r12, #0            \n"                       \
-                 "ldrne r12, [r12, %[tls]] \n"                       \
-                 "cmpne r12, #0            \n"                       \
-                 "ldrne r12, [r12, %[api]] \n"                       \
-                 "cmpne r12, #0            \n"                       \
-                 "bxne  r12                \n"                       \
+        #define CALL_GL_EXTENSION_API(_api)                         \
+            asm volatile(                                           \
+                GET_TLS(r12)                                        \
+                "cmp   r12, #0            \n"                       \
+                "ldrne r12, [r12, %[tls]] \n"                       \
+                "cmpne r12, #0            \n"                       \
+                "ldrne r12, [r12, %[api]] \n"                       \
+                "cmpne r12, #0            \n"                       \
+                "bxne  r12                \n"                       \
+		"bx    lr                 \n"                       \
+                :                                                   \
+                : [tls] "J"(TLS_SLOT_OPENGL_API*4),                 \
+                  [api] "J"(__builtin_offsetof(gl_hooks_t,          \
+                                          ext.extensions[_api]))    \
+                :                                                   \
+                );
     #else
         #define CALL_GL_EXTENSION_API(_api)                         \
              asm volatile(                                          \

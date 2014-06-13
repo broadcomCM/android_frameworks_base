@@ -75,8 +75,8 @@ using namespace android;
     #define API_ENTRY(_api) __attribute__((naked)) _api
 
     #ifdef BCM_HARDWARE
-        #define CALL_GL_EXTENSION_API(_api)                         \
-             asm volatile(                                          \
+        #define CALL_GL_API(_api, ...)                              \
+            asm volatile(                                           \
                 GET_TLS(r12)                                        \
                 "cmp   r12, #0            \n"                       \
                 "ldrne   r12, [r12, %[tls]] \n"                     \
@@ -84,9 +84,14 @@ using namespace android;
                 "ldrne pc,  [r12, %[api]] \n"                       \
                 "mov   r0, #0             \n"                       \
                 "bx    lr                 \n"                       \
+                :                                                   \
+                : [tls] "J"(TLS_SLOT_OPENGL_API*4),                 \
+                  [api] "J"(__builtin_offsetof(gl_hooks_t, gl._api))    \
+                :                                                   \
+                );
     #else
         #define CALL_GL_API(_api, ...)                              \
-             asm volatile(                                          \
+            asm volatile(                                           \
                 GET_TLS(r12)                                        \
                 "ldr   r12, [r12, %[tls]] \n"                       \
                 "cmp   r12, #0            \n"                       \
