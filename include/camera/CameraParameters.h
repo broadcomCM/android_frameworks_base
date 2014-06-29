@@ -253,7 +253,7 @@ public:
     // Example value: "21.0" or "-5". Write only.
     static const char KEY_GPS_ALTITUDE[];
 
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     static const char KEY_SKIN_TONE_ENHANCEMENT[] ;
     static const char KEY_SUPPORTED_SKIN_TONE_ENHANCEMENT_MODES[] ;
 #endif
@@ -579,7 +579,7 @@ public:
     static const char KEY_VIDEO_SNAPSHOT_SUPPORTED[];
     static const char KEY_FULL_VIDEO_SNAP_SUPPORTED[];
 
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     static const char KEY_LENSSHADE[] ;
     static const char KEY_SUPPORTED_LENSSHADE_MODES[] ;
 
@@ -611,7 +611,7 @@ public:
     // has no effect on still image capture.
     static const char KEY_VIDEO_STABILIZATION[];
 
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     static const char KEY_MEMORY_COLOR_ENHANCEMENT[];
     static const char KEY_SUPPORTED_MEM_COLOR_ENHANCE_MODES[];
 
@@ -639,7 +639,7 @@ public:
     // Value for KEY_FOCUS_DISTANCES.
     static const char FOCUS_DISTANCE_INFINITY[];
 
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     // DENOISE
     static const char KEY_DENOISE[];
     static const char KEY_SUPPORTED_DENOISE[];
@@ -733,7 +733,7 @@ public:
     static const char SCENE_MODE_SPORTS[];
     static const char SCENE_MODE_PARTY[];
     static const char SCENE_MODE_CANDLELIGHT[];
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     static const char SCENE_MODE_BACKLIGHT[];
     static const char SCENE_MODE_FLOWERS[];
     static const char SCENE_MODE_AR[];
@@ -838,7 +838,7 @@ public:
     static const char KEY_RECORD_STRIDE[];
     static const char KEY_RECORD_SLICE_HEIGHT[];
 #endif
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     static const char FOCUS_MODE_CONTINUOUS_CAMERA[];
 
     // Values for Continuous AF
@@ -870,17 +870,17 @@ public:
 
     static const char KEY_SHARPNESS[];
     static const char KEY_MAX_SHARPNESS[];
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     static const char KEY_MIN_SHARPNESS[];
 #endif
     static const char KEY_CONTRAST[];
     static const char KEY_MAX_CONTRAST[];
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     static const char KEY_MIN_CONTRAST[];
 #endif
     static const char KEY_SATURATION[];
     static const char KEY_MAX_SATURATION[];
-#ifdef QCOM_HARDWARE
+#if defined(QCOM_HARDWARE) || defined(BCM_HARDWARE)
     static const char KEY_MIN_SATURATION[];
 #endif
 
@@ -951,6 +951,35 @@ public:
     void setPreviewFpsRange(int minFPS,int maxFPS);
     void setPostviewSize(int x,int y);
     void getSupportedHfrSizes(Vector<Size> &sizes) const;
+#endif
+
+#if defined (SAMSUNG_CAMERA_QCOM) || defined(BCM_HARDWARE)
+    static const char FOCUS_MODE_FACEDETECT[];
+    static const char FOCUS_MODE_TOUCHAF[];
+    static const char ISO_50[];
+    static const char KEY_ANTI_SHAKE_MODE[];
+    static const char KEY_AUTO_CONTRAST[];
+    static const char KEY_BEAUTY_MODE[];
+    static const char KEY_BLUR_MODE[];
+    static const char KEY_VINTAGE_MODE[];
+    static const char KEY_WDR_MODE[];
+    static const char VINTAGE_MODE_BNW[];
+    static const char VINTAGE_MODE_COOL[];
+    static const char VINTAGE_MODE_NORMAL[];
+    static const char VINTAGE_MODE_OFF[];
+    static const char VINTAGE_MODE_WARM[];
+    static const char SCENE_MODE_DAWN[];
+    static const char SCENE_MODE_DUSKDAWN[];
+    static const char SCENE_MODE_FALL[];
+    static const char SCENE_MODE_FALL_COLOR[];
+    static const char SCENE_MODE_TEXT[];
+#endif
+
+#if defined(BCM_HARDWARE)
+    static const char KEY_CAM_DTP_MODE[];
+    static const char KEY_CAM_MODE[];
+
+    void getMode() const;
 #endif
 
 private:
