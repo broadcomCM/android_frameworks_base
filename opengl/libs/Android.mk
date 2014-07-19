@@ -27,6 +27,9 @@ LOCAL_SHARED_LIBRARIES += libdl
 # select the appropriate TLS codepath
 ifeq ($(ARCH_ARM_HAVE_TLS_REGISTER),true)
     LOCAL_CFLAGS += -DHAVE_ARM_TLS_REGISTER
+    ifeq ($(TARGET_ARCH_VARIANT),armv6-vfp)
+        LOCAL_ARM_MODE := arm
+    endif
 endif
 # we need to access the private Bionic header <bionic_tls.h>
 ifeq ($(TARGET_HAVE_TEGRA_ERRATA_657451),true)
@@ -38,6 +41,13 @@ LOCAL_CFLAGS += -DLOG_TAG=\"libEGL\"
 LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES -DEGL_EGLEXT_PROTOTYPES
 LOCAL_CFLAGS += -fvisibility=hidden
 LOCAL_CFLAGS += -DEGL_TRACE=1
+
+ifeq ($(ARCH_ARM_HAVE_TLS_REGISTER),true)
+  LOCAL_CFLAGS += -DHAVE_ARM_TLS_REGISTER
+    ifeq ($(TARGET_ARCH_VARIANT),armv6-vfp)
+        LOCAL_ARM_MODE := arm
+    endif
+endif
 
 ifneq ($(MAX_EGL_CACHE_ENTRY_SIZE),)
   LOCAL_CFLAGS += -DMAX_EGL_CACHE_ENTRY_SIZE=$(MAX_EGL_CACHE_ENTRY_SIZE)
@@ -82,6 +92,9 @@ LOCAL_SHARED_LIBRARIES += libdl
 # we need to access the private Bionic header <bionic_tls.h>
 ifeq ($(ARCH_ARM_HAVE_TLS_REGISTER),true)
     LOCAL_CFLAGS += -DHAVE_ARM_TLS_REGISTER
+    ifeq ($(TARGET_ARCH_VARIANT),armv6-vfp)
+        LOCAL_ARM_MODE := arm
+    endif
 endif
 ifeq ($(TARGET_HAVE_TEGRA_ERRATA_657451),true)
     LOCAL_CFLAGS += -DHAVE_TEGRA_ERRATA_657451
@@ -91,6 +104,13 @@ LOCAL_C_INCLUDES += bionic/libc/private
 LOCAL_CFLAGS += -DLOG_TAG=\"libGLESv1\"
 LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES -DEGL_EGLEXT_PROTOTYPES
 LOCAL_CFLAGS += -fvisibility=hidden
+
+ifeq ($(ARCH_ARM_HAVE_TLS_REGISTER),true)
+  LOCAL_CFLAGS += -DHAVE_ARM_TLS_REGISTER
+    ifeq ($(TARGET_ARCH_VARIANT),armv6-vfp)
+        LOCAL_ARM_MODE := arm
+    endif
+endif
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -111,6 +131,9 @@ LOCAL_SHARED_LIBRARIES += libdl
 # we need to access the private Bionic header <bionic_tls.h>
 ifeq ($(ARCH_ARM_HAVE_TLS_REGISTER),true)
     LOCAL_CFLAGS += -DHAVE_ARM_TLS_REGISTER
+    ifeq ($(TARGET_ARCH_VARIANT),armv6-vfp)
+        LOCAL_ARM_MODE := arm
+    endif
 endif
 ifeq ($(TARGET_HAVE_TEGRA_ERRATA_657451),true)
     LOCAL_CFLAGS += -DHAVE_TEGRA_ERRATA_657451
@@ -120,6 +143,13 @@ LOCAL_C_INCLUDES += bionic/libc/private
 LOCAL_CFLAGS += -DLOG_TAG=\"libGLESv2\"
 LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES -DEGL_EGLEXT_PROTOTYPES
 LOCAL_CFLAGS += -fvisibility=hidden
+
+ifeq ($(ARCH_ARM_HAVE_TLS_REGISTER),true)
+  LOCAL_CFLAGS += -DHAVE_ARM_TLS_REGISTER
+    ifeq ($(TARGET_ARCH_VARIANT),armv6-vfp)
+        LOCAL_ARM_MODE := arm
+    endif
+endif
 
 include $(BUILD_SHARED_LIBRARY)
 
