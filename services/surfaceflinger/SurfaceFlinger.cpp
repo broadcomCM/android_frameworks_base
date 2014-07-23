@@ -1572,7 +1572,7 @@ sp<Layer> SurfaceFlinger::createNormalSurface(
 
 #ifdef NO_RGBX_8888
     if (format == PIXEL_FORMAT_RGBX_8888)
-        format = PIXEL_FORMAT_RGBA_8888;
+        format = PIXEL_FORMAT_RGB_565;
 #endif
 
     sp<Layer> layer = new Layer(this, display, client);
