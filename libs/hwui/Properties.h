@@ -35,11 +35,7 @@
 #define LAYER_REMOVE_BIGGEST_FIRST 0
 
 // Textures used by layers must have dimensions multiples of this number
-#ifdef BCM_HARDWARE
-#define LAYER_SIZE 16
-#else
 #define LAYER_SIZE 64
-#endif
 
 /**
  * Debug level for app developers.
